@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<robot name="vishwaa" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find vishwaa_description)/urdf/vishwaa.urdf"/>
+
+  <!-- N*m per wheel. A 30kg 4-wheel rover needs sufficient torque to skid-steer turn smoothly. -->
+  <xacro:property name="max_wheel_torque" value="35.0"/>
+
+  <!-- colours and wheel friction:
+       fdir1: primary friction aligned with rolling direction (1 0 0)
+       mu1: longitudinal rolling grip (high = 1.5, prevents wheels sliding forward/backward)
+       mu2: lateral friction (0.25, allows smooth skid-steer turning without binding or drifting) -->
+  <gazebo reference="base_link"><material>Gazebo/Blue</material></gazebo>
+  <gazebo reference="lidar_link"><material>Gazebo/Black</material></gazebo>
+  <gazebo reference="camera_link"><material>Gazebo/Black</material></gazebo>
+  <xacro:macro name="wheel_gz" params="name">
+    <gazebo reference="${name}_link">
+      <material>Gazebo/Black</material>
+      <mu1>1.5</mu1>
+      <mu2>0.25</mu2>
+      <fdir1>1 0 0</fdir1>
+      <kp>1000000.0</kp>
+      <kd>10.0</kd>
+      <minDepth>0.005</minDepth>
+    </gazebo>
+  </xacro:macro>
+  <xacro:wheel_gz name="wheel_front_left"/>
+  <xacro:wheel_gz name="wheel_front_right"/>
+  <xacro:wheel_gz name="wheel_rear_left"/>
+  <xacro:wheel_gz name="wheel_rear_right"/>
+
+  <!-- 4-wheel skid-steer through the diff-drive plugin (2 wheel pairs) -->
+  <gazebo>
+    <plugin name="vishwaa_drive" filename="libgazebo_ros_diff_drive.so">
+      <update_rate>50</update_rate>
+      <num_wheel_pairs>2</num_wheel_pairs>
+      <left_joint>wheel_front_left_joint</left_joint>
+      <right_joint>wheel_front_right_joint</right_joint>
+      <left_joint>wheel_rear_left_joint</left_joint>
+      <right_joint>wheel_rear_right_joint</right_joint>
+      <!-- Effective track width for 4-wheel skid steer: sqrt(track^2 + wheelbase^2) approx 0.65m -->
+      <wheel_separation>0.65</wheel_separation>
+      <wheel_diameter>0.16</wheel_diameter>
+      <max_wheel_torque>${max_wheel_torque}</max_wheel_torque>
+      <max_wheel_acceleration>20.0</max_wheel_acceleration>
+      <command_topic>cmd_vel</command_topic>
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_footprint</robot_base_frame>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>false</publish_wheel_tf>
+    </plugin>
+    <plugin name="vishwaa_joint_states" filename="libgazebo_ros_joint_state_publisher.so">
+      <update_rate>30</update_rate>
+      <joint_name>wheel_front_left_joint</joint_name>
+      <joint_name>wheel_front_right_joint</joint_name>
+      <joint_name>wheel_rear_left_joint</joint_name>
+      <joint_name>wheel_rear_right_joint</joint_name>
+    </plugin>
+  </gazebo>
+
+  <!-- 2D LiDAR -> /scan -->
+  <gazebo reference="lidar_link">
+    <sensor name="lidar" type="ray">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <scan><horizontal><samples>360</samples><resolution>1</resolution>
+          <min_angle>-3.14159</min_angle><max_angle>3.14159</max_angle></horizontal></scan>
+        <range><min>0.15</min><max>12.0</max><resolution>0.01</resolution></range>
+        <noise><type>gaussian</type><mean>0.0</mean><stddev>0.01</stddev></noise>
+      </ray>
+      <plugin name="lidar_plugin" filename="libgazebo_ros_ray_sensor.so">
+        <ros><remapping>~/out:=scan</remapping></ros>
+        <output_type>sensor_msgs/LaserScan</output_type>
+        <frame_name>lidar_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- depth camera -> /camera/depth_camera/... -->
+  <gazebo reference="camera_link">
+    <sensor name="depth_camera" type="depth">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>false</visualize>
+      <update_rate>15</update_rate>
+      <camera>
+        <horizontal_fov>1.5184</horizontal_fov>
+        <image><width>640</width><height>480</height><format>R8G8B8</format></image>
+        <clip><near>0.28</near><far>10.0</far></clip>
+      </camera>
+      <plugin name="depth_camera_plugin" filename="libgazebo_ros_camera.so">
+        <ros><namespace>camera</namespace></ros>
+        <camera_name>depth_camera</camera_name>
+        <frame_name>camera_depth_optical_frame</frame_name>
+        <hack_baseline>0.07</hack_baseline>
+        <min_depth>0.28</min_depth>
+        <max_depth>10.0</max_depth>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <!-- six ultrasonic sensors -> /<name>/range -->
+  <xacro:macro name="ultrasonic" params="name">
+    <gazebo reference="${name}_link">
+      <material>Gazebo/Black</material>
+      <sensor name="${name}" type="ray">
+        <pose>0 0 0 0 0 0</pose>
+        <visualize>false</visualize>
+        <update_rate>10</update_rate>
+        <ray>
+          <scan>
+            <horizontal><samples>5</samples><resolution>1</resolution><min_angle>-0.13</min_angle><max_angle>0.13</max_angle></horizontal>
+            <vertical><samples>5</samples><resolution>1</resolution><min_angle>-0.13</min_angle><max_angle>0.13</max_angle></vertical>
+          </scan>
+          <range><min>0.03</min><max>4.0</max><resolution>0.01</resolution></range>
+        </ray>
+        <plugin name="${name}_plugin" filename="libgazebo_ros_ray_sensor.so">
+          <ros><remapping>~/out:=${name}/range</remapping></ros>
+          <output_type>sensor_msgs/Range</output_type>
+          <radiation_type>ultrasound</radiation_type>
+          <frame_name>${name}_link</frame_name>
+        </plugin>
+      </sensor>
+    </gazebo>
+  </xacro:macro>
+  <xacro:ultrasonic name="us_front_left"/>
+  <xacro:ultrasonic name="us_front_right"/>
+  <xacro:ultrasonic name="us_rear_left"/>
+  <xacro:ultrasonic name="us_rear_right"/>
+  <xacro:ultrasonic name="us_left"/>
+  <xacro:ultrasonic name="us_right"/>
+</robot>

@@ -1,0 +1,350 @@
+<?xml version="1.0"?>
+<robot name="vishwaa">
+  <material name="vishwaa_blue"><color rgba="0.16 0.36 0.70 1"/></material>
+  <material name="matte_black"><color rgba="0.05 0.05 0.05 1"/></material>
+  <material name="tt555_orange"><color rgba="1.0 0.40 0.0 1"/></material>
+  <link name="base_footprint"/>
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.002165 0.000532 0.113181" rpy="0 0 0"/>
+      <mass value="29.03409"/>
+      <inertia ixx="0.787712" ixy="-0.001158" ixz="-0.099656" iyy="1.85682" iyz="0.000778" izz="2.245856"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 -0.08" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/chassis_hull.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="vishwaa_blue"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.08" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/top_lid.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="vishwaa_blue"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.08" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/sensor_disc.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="vishwaa_blue"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.08" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/handle_right.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.08" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/handle_left.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0.25 0.2295 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/gearmotor_tt555.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="tt555_orange"/>
+    </visual>
+    <visual>
+      <origin xyz="0.25 -0.2295 0" rpy="0 0 3.141593"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/gearmotor_tt555.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="tt555_orange"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.25 0.2295 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/gearmotor_tt555.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="tt555_orange"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.25 -0.2295 0" rpy="0 0 3.141593"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/gearmotor_tt555.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="tt555_orange"/>
+    </visual>
+    <visual>
+      <origin xyz="0.25 0.2295 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/motor_mount_plate.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0.25 -0.2295 0" rpy="0 0 3.141593"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/motor_mount_plate.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.25 0.2295 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/motor_mount_plate.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.25 -0.2295 0" rpy="0 0 3.141593"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/motor_mount_plate.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0.25 0.2295 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/motor_saddle.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <visual>
+      <origin xyz="0.25 -0.2295 0" rpy="0 0 3.141593"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/motor_saddle.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.25 0.2295 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/motor_saddle.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.25 -0.2295 0" rpy="0 0 3.141593"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/motor_saddle.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.1325" rpy="0 0 0"/>
+      <geometry><box size="0.94 0.475 0.195"/></geometry>
+    </collision>
+  </link>
+  <link name="wheel_front_left_link">
+    <inertial>
+      <origin xyz="0 0.018863 0" rpy="0 0 0"/>
+      <mass value="0.670094"/>
+      <inertia ixx="0.001352" ixy="0" ixz="0" iyy="0.002459" iyz="0" izz="0.001352"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/wheel.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0.025 0" rpy="1.570796 0 0"/>
+      <geometry><cylinder radius="0.08" length="0.05"/></geometry>
+    </collision>
+  </link>
+  <link name="wheel_front_right_link">
+    <inertial>
+      <origin xyz="0 0.018863 0" rpy="0 0 0"/>
+      <mass value="0.670094"/>
+      <inertia ixx="0.001352" ixy="0" ixz="0" iyy="0.002459" iyz="0" izz="0.001352"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/wheel.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0.025 0" rpy="1.570796 0 0"/>
+      <geometry><cylinder radius="0.08" length="0.05"/></geometry>
+    </collision>
+  </link>
+  <link name="wheel_rear_left_link">
+    <inertial>
+      <origin xyz="0 0.018863 0" rpy="0 0 0"/>
+      <mass value="0.670094"/>
+      <inertia ixx="0.001352" ixy="0" ixz="0" iyy="0.002459" iyz="0" izz="0.001352"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/wheel.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0.025 0" rpy="1.570796 0 0"/>
+      <geometry><cylinder radius="0.08" length="0.05"/></geometry>
+    </collision>
+  </link>
+  <link name="wheel_rear_right_link">
+    <inertial>
+      <origin xyz="0 0.018863 0" rpy="0 0 0"/>
+      <mass value="0.670094"/>
+      <inertia ixx="0.001352" ixy="0" ixz="0" iyy="0.002459" iyz="0" izz="0.001352"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/wheel.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0.025 0" rpy="1.570796 0 0"/>
+      <geometry><cylinder radius="0.08" length="0.05"/></geometry>
+    </collision>
+  </link>
+  <link name="lidar_link">
+    <inertial>
+      <origin xyz="0 0 -0.014023" rpy="0 0 0"/>
+      <mass value="0.182769"/>
+      <inertia ixx="0.000087" ixy="0" ixz="0" iyy="0.000087" iyz="0" izz="0.000124"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.385 0 -0.4135" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/lidar_2d.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0135" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.038" length="0.041"/></geometry>
+    </collision>
+  </link>
+  <link name="camera_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.059625"/>
+      <inertia ixx="0.000043" ixy="0" ixz="0" iyy="0.000006" iyz="0" izz="0.000043"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.4275 0 -0.3505" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/depth_camera.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.025 0.09 0.025"/></geometry>
+    </collision>
+  </link>
+  <link name="camera_depth_optical_frame"/>
+  <link name="us_front_right_link">
+    <inertial>
+      <origin xyz="0.005106 0 0" rpy="0 0 0"/>
+      <mass value="0.014937"/>
+      <inertia ixx="0.000003" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/ultrasonic_module.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+  </link>
+  <link name="us_front_left_link">
+    <inertial>
+      <origin xyz="0.005106 0 0" rpy="0 0 0"/>
+      <mass value="0.014937"/>
+      <inertia ixx="0.000003" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/ultrasonic_module.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+  </link>
+  <link name="us_rear_right_link">
+    <inertial>
+      <origin xyz="0.005106 0 0" rpy="0 0 0"/>
+      <mass value="0.014937"/>
+      <inertia ixx="0.000003" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/ultrasonic_module.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+  </link>
+  <link name="us_rear_left_link">
+    <inertial>
+      <origin xyz="0.005106 0 0" rpy="0 0 0"/>
+      <mass value="0.014937"/>
+      <inertia ixx="0.000003" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/ultrasonic_module.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+  </link>
+  <link name="us_left_link">
+    <inertial>
+      <origin xyz="0.005106 0 0" rpy="0 0 0"/>
+      <mass value="0.014937"/>
+      <inertia ixx="0.000003" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/ultrasonic_module.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+  </link>
+  <link name="us_right_link">
+    <inertial>
+      <origin xyz="0.005106 0 0" rpy="0 0 0"/>
+      <mass value="0.014937"/>
+      <inertia ixx="0.000003" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://vishwaa_description/meshes/ultrasonic_module.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="matte_black"/>
+    </visual>
+  </link>
+  <joint name="base_footprint_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0.08" rpy="0 0 0"/>
+  </joint>
+  <joint name="wheel_front_left_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_front_left_link"/>
+    <origin xyz="0.25 0.2415 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.01" friction="0.01"/>
+  </joint>
+  <joint name="wheel_front_right_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_front_right_link"/>
+    <origin xyz="0.25 -0.2415 0" rpy="0 0 3.141593"/>
+    <axis xyz="0 -1 0"/>
+    <dynamics damping="0.01" friction="0.01"/>
+  </joint>
+  <joint name="wheel_rear_left_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_rear_left_link"/>
+    <origin xyz="-0.25 0.2415 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <dynamics damping="0.01" friction="0.01"/>
+  </joint>
+  <joint name="wheel_rear_right_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_rear_right_link"/>
+    <origin xyz="-0.25 -0.2415 0" rpy="0 0 3.141593"/>
+    <axis xyz="0 -1 0"/>
+    <dynamics damping="0.01" friction="0.01"/>
+  </joint>
+  <joint name="lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+    <origin xyz="0.385 0 0.3335" rpy="0 0 0"/>
+  </joint>
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0.4275 0 0.2705" rpy="0 0 0"/>
+  </joint>
+  <joint name="camera_optical_joint" type="fixed">
+    <parent link="camera_link"/>
+    <child link="camera_depth_optical_frame"/>
+    <origin xyz="0.0125 0 0" rpy="-1.570796 0 -1.570796"/>
+  </joint>
+  <joint name="us_front_right_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="us_front_right_link"/>
+    <origin xyz="0.466 -0.13 0.145" rpy="0 0 0"/>
+  </joint>
+  <joint name="us_front_left_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="us_front_left_link"/>
+    <origin xyz="0.466 0.13 0.145" rpy="0 0 0"/>
+  </joint>
+  <joint name="us_rear_right_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="us_rear_right_link"/>
+    <origin xyz="-0.466 -0.13 0.145" rpy="0 0 3.141593"/>
+  </joint>
+  <joint name="us_rear_left_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="us_rear_left_link"/>
+    <origin xyz="-0.466 0.13 0.145" rpy="0 0 3.141593"/>
+  </joint>
+  <joint name="us_left_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="us_left_link"/>
+    <origin xyz="0.06 0.2335 0.135" rpy="0 0 1.570796"/>
+  </joint>
+  <joint name="us_right_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="us_right_link"/>
+    <origin xyz="0.06 -0.2335 0.135" rpy="0 0 -1.570796"/>
+  </joint>
+</robot>
